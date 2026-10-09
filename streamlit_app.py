@@ -457,7 +457,7 @@ with st.sidebar:
         )
     st.title('Vehicle data comes from 2023-2025 models')
 
-  purchase_price_input = st.number_input(
+    purchase_price_input = st.number_input(
         label='**Step 3:** What was the purchase price of your electric vehicle?',
         min_value=0, 
         max_value=250000, 
