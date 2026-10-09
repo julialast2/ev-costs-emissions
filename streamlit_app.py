@@ -470,7 +470,7 @@ with st.sidebar:
         value=None, 
         step=500,
         help='If no value is chosen, the model will use MSRP')
-  ICEV_purchase_price_input = st.number_input(
+    ICEV_purchase_price_input = st.number_input(
         label='**Step 3:** What was the purchase price of your gas vehicle?',
         min_value=0, 
         max_value=250000, 
