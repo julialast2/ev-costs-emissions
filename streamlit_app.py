@@ -115,7 +115,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, purchase_price_input=25000, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -146,7 +146,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     EV_model_df = pd.merge(EV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
     ICEV_model_df = pd.merge(ICEV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
 
-    EV_model_df['running_cost_of_ownership'] = EV_model_df['MSRP'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
+    EV_model_df['running_cost_of_ownership'] = EV_model_df[purchase_price_input] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
                                                                                                                                                                                                                                       (1.11 / 100 * miles_per_year / 12),
                                                                                                                                                                                                                                       (138.5 / 12))
     ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['MSRP'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
@@ -172,6 +172,8 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
 
     ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
                                                   #8,887 gCO2/gallon
+    if purchase_price_input == None: 
+      
   
     intersection_point_emissions = emissions_intersection_point_months(EV_model_df, ICEV_model_df)
     intersection_point_cost = cost_intersection_point_months(EV_model_df, ICEV_model_df)
@@ -250,7 +252,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
         tax_credit_EV_df['fuelType'] = '(w/ incentives)'
         plot_func_df.loc[plot_func_df['fuelType'] == 'Electricity', 'fuelType'] = '(w/o incentives)'        
         plot_func_df = pd.concat([plot_func_df, tax_credit_EV_df])
-        color_mapping = {'(w/ Tax Credit)': f'{UCE_blue}', '(w/o Tax Credit)': 'grey', 'Regular': f'{UCE_red}'}
+        color_mapping = {'(w/ incentives)': f'{UCE_blue}', '(w/o incentives)': 'grey', 'Regular': f'{UCE_red}'}
         intersection_point_cost = cost_intersection_point_months(tax_credit_EV_df, ICEV_model_df)
         lifetime_cost_savings = calculate_lifetime_cost_savings(tax_credit_EV_df, ICEV_model_df)
 
@@ -336,7 +338,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     
         group_key = position_by_fuelType.get(fuel, i)
         x = group_key
-        z = 3 if "w/ Tax Credit" in fuel else 2
+        z = 3 if "w/ incentives" in fuel else 2
         ax1.bar(
             x=x, 
             height=MSRP, 
@@ -456,9 +458,9 @@ with st.sidebar:
      st.title('Vehicle data comes from 2023-2025 models')
 
   purchase_price_input = st.number_input(
-        label='**Step 3:** What was the purchase price of your vehicle?',
+        label='**Step 3:** What was the purchase price of your electric vehicle?',
         min_value=0, 
-        max_value=100000, 
+        max_value=250000, 
         value=25000, 
         step=500,
         help='Default set to the average purchase price of a used vehicle in Utah according to CARFAX: $25,000',)
