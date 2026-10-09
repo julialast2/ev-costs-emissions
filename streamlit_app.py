@@ -472,7 +472,7 @@ with st.sidebar:
         help='Default set to the average cost of electricity in Utah: $0.12/kWh',
         label_visibility="visible")
 
-  incentives_link = 'https://incentivefinder.utah.gov/'
+    incentives_link = 'https://incentivefinder.utah.gov/'
     incentives_input = st.number_input(
         label='**Step 5:** Did you recieve incentives?',
         min_value=0, 
