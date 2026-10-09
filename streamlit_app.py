@@ -455,7 +455,7 @@ with st.sidebar:
         index = 5,
         format_func = add_make_to_model
         )
-     st.title('Vehicle data comes from 2023-2025 models')
+    st.title('Vehicle data comes from 2023-2025 models')
 
   purchase_price_input = st.number_input(
         label='**Step 3:** What was the purchase price of your electric vehicle?',
