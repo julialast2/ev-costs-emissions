@@ -172,7 +172,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, purchase_price_i
 
     ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
                                                   #8,887 gCO2/gallon
-    if purchase_price_input == None: 
+   
       
   
     intersection_point_emissions = emissions_intersection_point_months(EV_model_df, ICEV_model_df)
