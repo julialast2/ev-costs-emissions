@@ -458,7 +458,7 @@ with st.sidebar:
     gas_price_slider = st.slider(
         label='Gas Price ($/gallon):', 
         min_value=2.00, 
-        max_value=5.00, 
+        max_value=8.00, 
         value=3.20,
         help='Default set to the average price of gas in Utah: $3.20/gallon',
         label_visibility="visible")
@@ -472,12 +472,15 @@ with st.sidebar:
         help='Default set to the average cost of electricity in Utah: $0.12/kWh',
         label_visibility="visible")
 
-    tax_credit_link = 'https://homes.rewiringamerica.org/federal-incentives/30d-new-ev-tax-incentive'
-    tax_credit_checkbox = st.checkbox(
-        label='**Step 4:** Apply Full Federal Tax Credit?',
-        help='Check this box to include the full, $7,500 Federal Tax Credit for EVs.  For more information, [click here](' + tax_credit_link + ').',
-        value=True
-        )
+  incentives_link = 'https://incentivefinder.utah.gov/'
+    incentives_input = st.number_input(
+        label='**Step 5:** Did you recieve incentives?',
+        min_value=0, 
+        max_value=10000, 
+        value=0, 
+        step=500,
+        help='Use this scale to indicate the amount of incentives you recieved towards the purchase of your vehicle. Incentives are a financial benefit provided by governments, utilities, or automakers to lower the cost of buying an EV. To find more incentives, [click here](' + incentives_link + ').',
+    )
 
     miles_input_box = st.number_input(
         label='**Step 5:** How Many Miles Do You Drive per Year?',
