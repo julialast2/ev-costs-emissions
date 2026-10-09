@@ -188,8 +188,8 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     initial_values = plot_func_df[plot_func_df['cumulative_months'] == 0]
 
     position_by_fuelType = {
-        "(w/o Tax Credit)": -1,
-        "(w/ Tax Credit)": -1,
+        "(w/o Incentives)": -1,
+        "(w/ Incentives)": -1,
         "Regular": 1,
         "Electricity": -1
     }
@@ -246,11 +246,11 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
 
     if apply_tax_credit:
         tax_credit_EV_df = EV_model_df
-        tax_credit_EV_df['running_cost_of_ownership'] = tax_credit_EV_df['running_cost_of_ownership'] - 7500
-        tax_credit_EV_df['fuelType'] = '(w/ Tax Credit)'
-        plot_func_df.loc[plot_func_df['fuelType'] == 'Electricity', 'fuelType'] = '(w/o Tax Credit)'        
+        tax_credit_EV_df['running_cost_of_ownership'] = tax_credit_EV_df['running_cost_of_ownership'] - incentives_input
+        tax_credit_EV_df['fuelType'] = '(w/ Incentives)'
+        plot_func_df.loc[plot_func_df['fuelType'] == 'Electricity', 'fuelType'] = '(w/o Incentives)'        
         plot_func_df = pd.concat([plot_func_df, tax_credit_EV_df])
-        color_mapping = {'(w/ Tax Credit)': f'{UCE_blue}', '(w/o Tax Credit)': 'grey', 'Regular': f'{UCE_red}'}
+        color_mapping = {'(w/ Tax Credit)': f'{UCE_blue}', '(w/o Incentives)': 'grey', 'Regular': f'{UCE_red}'}
         intersection_point_cost = cost_intersection_point_months(tax_credit_EV_df, ICEV_model_df)
         lifetime_cost_savings = calculate_lifetime_cost_savings(tax_credit_EV_df, ICEV_model_df)
 
