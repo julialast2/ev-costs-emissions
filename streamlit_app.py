@@ -456,7 +456,7 @@ with st.sidebar:
         )
     
     EV_purchase_price_input = st.number_input(
-        label='**Step 2:** What was the purchase price of your electric vehicle?',
+        label='What was the purchase price of your electric vehicle?',
         min_value=0, 
         max_value=250000, 
         value=None, 
@@ -471,7 +471,7 @@ with st.sidebar:
         )
 
     ICEV_purchase_price_input = st.number_input(
-        label='**Step 3:** What was the purchase price of your gas vehicle?',
+        label='What was the purchase price of your gas vehicle?',
         min_value=0, 
         max_value=250000, 
         value=None, 
