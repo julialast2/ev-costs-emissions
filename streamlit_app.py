@@ -172,11 +172,11 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
 
     ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
                                                   #8,887 gCO2/gallon
-   if EV_purchase_price_input == None: 
+    if EV_purchase_price_input == None: 
         EV_model_df['running_cost_of_ownership'] = EV_model_df['MSRP'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
                                                                                                                                                                                                                                       (1.11 / 100 * miles_per_year / 12),
                                                                                                                                                                                                                                       (138.5 / 12))
-  if ICEV_purchase_price_input == None:
+    if ICEV_purchase_price_input == None:
         ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['ICEV_purchase_price_input'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
 
       
