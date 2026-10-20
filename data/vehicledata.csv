@@ -1,17 +1,62 @@
-Make_CarbonCounter,Model_CarbonCounter,MSRP,Manufacture_Emissions_tCO2,Production_Emissions,Battery_Emissions,epa_id,year,make,model,comb08,combE,fuelType,id,running_cost_of_ownership,running_emissions
-Tesla,Model Y | Long Range AWD,49990,12.467839999999999,36.1,37.5,43406,2021,Tesla,Model Y Long Range AWD,125,27.0455,Electricity,43406,0.0,0.0
-Tesla,Model 3 | Long Range AWD,46990,11.959639999999997,33.1,37.5,43401,2021,Tesla,Model 3 Long Range AWD,134,25.109,Electricity,43401,0.0,0.0
-Tesla,Model S | Long Range Plus,69420,14.670039999999997,36.6,50.0,44051,2021,Tesla,Model S Long Range,120,28.1799,Electricity,44051,0.0,0.0
-Ford,Mustang Mach-E | AWD,38095,12.247620000000001,38.3,34.0,43602,2021,Ford,Mustang Mach-E AWD,93,36.3643,Electricity,43602,0.0,0.0
-RAM,1500 | 4WD 3.6L StartStop,35745,8.28366,48.9,0.0,43014,2021,Ram,1500 4WD,21,0.0,Regular,43014,0.0,0.0
-Ford,F150 | 4WD 2.7L,34780,7.673819999999999,45.3,0.0,43464,2021,Ford,F150 Pickup 4WD,21,0.0,Regular,43464,0.0,0.0
-Chevrolet,Silverado | 4WD 4.3L,35195,8.53776,50.4,0.0,43192,2021,Chevrolet,Silverado 4WD,20,0.0,Regular,43192,0.0,0.0
-Toyota,RAV4 | AWD,27450,6.58966,38.9,0.0,42969,2021,Toyota,RAV4 AWD,28,0.0,Regular,42969,0.0,0.0
-Ford,F-150 Lightning | Pro 4WD,51974,16.2624,47.0,49.0,45316,2022,Ford,F-150 Lightning Platinum 4WD,66,50.7071,Electricity,45316,0.0,0.0
-Nissan,Leaf (62 kW-hr battery pack),38220,10.8416,33.0,31.0,43665,2021,Nissan,Leaf (62 kW-hr battery pack),108,31.3048,Electricity,43665,0.0,0.0
-Nissan,Leaf (40 kW-hr battery pack),31620,8.910440000000001,32.6,20.0,43664,2021,Nissan,Leaf (40 kW-hr battery pack),111,30.4264,Electricity,43664,0.0,0.0
-Honda,Civic 4Dr 1.5L,21250,5.590199999999999,33.0,0.0,43356,2021,Honda,Civic 4Dr,36,0.0,Regular,43356,0.0,0.0
-Hyundai,Hyundai Kona | Electric,37190,10.7569,31.5,32.0,43747,2021,Hyundai,Kona Electric,120,27.0,Electricity,43747,0.0,0.0
-Chevrolet,Chevrolet Equinox | AWD,27900,6.55578,38.7,0.0,43397,2021,Chevrolet,Equinox AWD,27,0.0,Regular,43397,0.0,0.0
-Kia,Kia EV6 | Long Range AWD,52400,12.721939999999998,36.6,38.5,44925,2022,Kia,EV6 AWD (Long Range),105,31.7188,Electricity,44925,0.0,0.0
-Toyota,Corolla 1.8L Auto,20025,5.77654,34.1,0.0,42582,2021,Toyota,Corolla,33,0.0,Regular,42582,0.0,0.0
+Make,Model_EPA,epa_id,Model_CarbonCounter,Year _EPA,MSRP,Manufacture_Emissions_tCO2,Production_Emissions,Battery_Emissions,year,make,model,comb08,combE,fuelType,id,running_cost_of_ownership,running_emissions,EV_purchase_price_input,ICEV_purchase_price_input
+Ford ,Fusion FWD,41798,Fusion FWD 2.5L,2023,23170,6.471080000000001,38.2,0.0,2020,Ford,Fusion FWD,27,0.0,Regular,41798,0.0,0.0,0.0,0.0
+Hyundai,Ioniq,42242,Ioniq Electric,2023,33045,7.724639999999999,32.9,12.7,2020,Hyundai,Ioniq,55,0.0,Regular,42242,0.0,0.0,0.0,0.0
+Nissan,Leaf (40 kW-hr battery pack),44446,Leaf (40 kW-hr battery pack),2021,31620,8.910440000000001,32.6,20.0,2022,Nissan,Leaf (40 kW-hr battery pack),111,30.4264,Electricity,44446,0.0,0.0,0.0,0.0
+Nissan,Leaf (62 kW-hr battery pack),44447,Leaf (62 kW-hr battery pack),2021,38220,10.8416,33.0,31.0,2022,Nissan,Leaf (62 kW-hr battery pack),108,31.3048,Electricity,44447,0.0,0.0,0.0,0.0
+Ford,Mustang Mach-E AWD Extended,45139,Mustang Mach-E  AWD Extended,2025,49585,20.31106,75.3,44.6,2022,Ford,Mustang Mach-E AWD Extended,91,37.0929,Electricity,45139,0.0,0.0,0.0,0.0
+Chevrolet,Bolt EUV,45750,Bolt EUV,2023,27200,10.73996,30.9,32.5,2023,Chevrolet,Bolt EUV,115,29.4031,Electricity,45750,0.0,0.0,0.0,0.0
+Chevrolet ,Bolt EV,45751,Bolt EV,2023,36500,10.63832,29.8,33.0,2023,Chevrolet,Bolt EV,120,28.1083,Electricity,45751,0.0,0.0,0.0,0.0
+Subaru ,Outback AWD,46541,Outback AWD 2.5L 4Cyl,2025,28895,12.010460000000002,70.9,0.0,2024,Subaru,Outback AWD,28,0.0,Regular,46541,0.0,0.0,0.0,0.0
+BMW ,X5,46544,X5 xDrive40i 3.0L 6Cyl,2025,68000,15.855839999999999,93.6,0.0,2024,BMW,X5 sDrive40i,25,0.0,Premium,46544,0.0,0.0,0.0,0.0
+Cadillac,Xt6,46689,XT6 Base,2025,51195,14.0602,83.0,0.0,2024,Cadillac,XT6 FWD,23,0.0,Premium,46689,0.0,0.0,0.0,0.0
+Audi ,Q5,46701,Q5 Base,2025,45400,13.24708,78.2,0.0,2024,Audi,Q5 quattro,26,0.0,Premium,46701,0.0,0.0,0.0,0.0
+Honda,CR-V,46716,CR-V AWD ICEV,2025,31600,11.99352,70.8,0.0,2024,Honda,CR-V AWD,37,0.0,Regular,46716,0.0,0.0,0.0,0.0
+Chevrolet,Silverado,46823,Silverado | 4WD 5.3L 8Cyl,2025,52495,16.093,95.0,0.0,2024,Chevrolet,Silverado 4WD,17,0.0,Gasoline or E85,46823,0.0,0.0,0.0,0.0
+RAM,1500 4WD,46853,1500 4WD 3.6L 6Cyl,2024,44125,15.398460000000004,90.9,0.0,2024,Ram,1500 4WD,21,0.0,Regular,46853,0.0,0.0,0.0,0.0
+Hyundai ,Ioniq 5 Long Range,46962,Ioniq 5 Long Range AWD,2025,41650,18.85422,73.3,38.0,2024,Hyundai,Ioniq 5 Long range AWD,99,34.0206,Electricity,46962,0.0,0.0,0.0,0.0
+Kia,Niro Electric,46967,Niro Electric,2025,40975,16.33016,64.6,31.8,2024,Kia,Niro Electric,113,29.0,Electricity,46967,0.0,0.0,0.0,0.0
+Kia,EV6 AWD (Long Range),46969,Kia EV6 Long Range AWD,2025,49850,19.46406,76.9,38.0,2024,Kia,EV6 Long Range AWD (19 inch Wheels),109,31.0595,Electricity,46969,0.0,0.0,0.0,0.0
+Honda,Civic 4Dr,47068,Civic 4Dr ICEV,2025,24250,10.01154,59.1,0.0,2024,Honda,Civic 4Dr,36,0.0,Regular,47068,0.0,0.0,0.0,0.0
+Toyota ,Camry,47090,Camry LE/SE,2025,26420,11.078760000000003,65.4,0.0,2024,Toyota,Camry LE/SE,32,0.0,Regular,47090,0.0,0.0,0.0,0.0
+Mazda,3 4Dr,47330,3 4-door 2WD,2025,23950,10.55362,62.3,0.0,2024,Mazda,3 4-Door 2WD,31,0.0,Regular,47330,0.0,0.0,0.0,0.0
+Toyota ,Corolla FWD,47343,Corolla 2.0L 4Cyl,2025,22175,10.367280000000001,61.2,0.0,2024,Toyota,Corolla,35,0.0,Regular,47343,0.0,0.0,0.0,0.0
+Toyota,RAV4 | AWD,47387,RAV4 | AWD,2025,28675,11.248160000000002,66.4,0.0,2024,Toyota,RAV4 AWD,29,0.0,Regular,47387,0.0,0.0,0.0,0.0
+Kia,EV 9 Long Range AWD,47452,EV9 Long Range AWD,2025,61395,23.30944,88.6,49.0,2024,Kia,EV9 Long Range AWD,83,41.0,Electricity,47452,0.0,0.0,0.0,0.0
+Nissan,Rogue AWD,47665,Rogue AWD,2025,32720,11.55308,68.2,0.0,2024,Nissan,Rogue AWD,31,0.0,Regular,47665,0.0,0.0,0.0,0.0
+BMW,4 Series,47765,4 Series 430i Coupe 2.0L 4Cyl,2025,50700,12.1121,71.5,0.0,2025,BMW,430i Coupe,31,0.0,Premium,47765,0.0,0.0,0.0,0.0
+Hyundai,Tucson AWD,47793,Tucson AWD,2025,29855,12.010460000000002,70.9,0.0,2025,Hyundai,Tucson AWD,26,0.0,Regular,47793,0.0,0.0,0.0,0.0
+Chevrolet,Equinox EV AWD,47815,Equinox EV AWD,2025,49400,21.63238,86.0,41.7,2024,Chevrolet,Equinox EV AWD,96,35.1247,Electricity,47815,0.0,0.0,0.0,0.0
+Ford,F-150 Lightning AWD,47821,F-150 Lightning Base,2025,70090,28.34062,103.0,64.3,2024,Ford,F-150 Lightning 4WD,68,49.3643,Electricity,47821,0.0,0.0,0.0,0.0
+Honda,Prologue,47828,Prologue FWD,2025,47400,21.20888,83.5,41.7,2024,Honda,Prologue FWD,99,33.9679,Electricity,47828,0.0,0.0,0.0,0.0
+Lexus ,RZ,47832,RZ 300e,2025,54000,18.481540000000003,73.4,35.7,2024,Lexus,RZ 300e (18 inch wheels),125,27.0,Electricity,47832,0.0,0.0,0.0,0.0
+Nissan,Ariya,47853,Ariya ENGAGE e-4ORCE 63kWh,2025,39590,19.684279999999994,85.3,30.9,2024,Nissan,ARIYA ENGAGE e-4ORCE 63kWh,95,35.2939,Electricity,47853,0.0,0.0,0.0,0.0
+Hyundai ,Elantra,48019,Elantra Base,2025,21875,9.41864,55.6,0.0,2025,Hyundai,Elantra,34,0.0,Regular,48019,0.0,0.0,0.0,0.0
+Chevrolet,Equinox AWD,48089,Chevrolet Equinox | AWD,2025,30600,11.84106,69.9,0.0,2025,Chevrolet,Equinox AWD,26,0.0,Regular,48089,0.0,0.0,0.0,0.0
+Hyundai ,Kona,48093,Kona AWD 2.0L 4Cyl,2025,25850,10.350340000000001,61.1,0.0,2025,Hyundai,Kona AWD,26,0.0,Regular,48093,0.0,0.0,0.0,0.0
+GMC,Sierra,48232,Sierra 4WD ICEV 5.3L 8Cyl,2025,45585,16.87224,99.6,0.0,2025,GMC,Sierra 4WD,17,0.0,Regular,48232,0.0,0.0,0.0,0.0
+Honda ,Odyssey,48254,Odyssey Base,2025,41920,14.51758,85.7,0.0,2025,Honda,Odyssey,22,0.0,Regular,48254,0.0,0.0,0.0,0.0
+BMW,I4,48310,I4 eDrive40 Gran Coupe,2025,57900,20.36188,79.0,41.2,2025,BMW,i4 eDrive40 Gran Coupe (18 inch wheels),112,30.1552,Electricity,48310,0.0,0.0,0.0,0.0
+BMW,IX,48333,iX Base,2025,88425,25.088140000000003,93.4,54.7,2025,BMW,iX M60 (21 inch Wheels),76,44.3995,Electricity,48333,0.0,0.0,0.0,0.0
+Hyundai,Kona Electric,48357,Hyundai Kona Electric,2025,34270,15.889719999999999,62.0,31.8,2025,Hyundai,Kona Electric (17 inch Wheels),116,29.0825,Electricity,48357,0.0,0.0,0.0,0.0
+Hyundai,Ioniq 6,48361,Ioniq 6 AWD,2025,38900,19.09138,74.7,38.0,2025,Hyundai,Ioniq 6 AWD (18 inch Wheels),121,28.0,Electricity,48361,0.0,0.0,0.0,0.0
+Nissan,Leaf ,48400,Leaf Base,2025,28140,15.246,70.4,19.6,2025,Nissan,LEAF,111,30.4264,Electricity,48400,0.0,0.0,0.0,0.0
+Jeep,Wrangler,48530,Wrangler 2dr 4WD 2.0L 4Cyl,2025,36595,13.060739999999997,77.1,0.0,2025,Jeep,Wrangler 2dr 4WD,21,0.0,Regular,48530,0.0,0.0,0.0,0.0
+Kia,Telluride,48534,Telluride AWD,2025,37585,13.738339999999999,81.1,0.0,2025,Kia,Telluride AWD,20,0.0,Regular,48534,0.0,0.0,0.0,0.0
+Subaru ,Crosstrek AWD,48543,Crosstrek Base,2025,27115,10.977120000000001,64.8,0.0,2025,Subaru,Crosstrek AWD,29,0.0,Regular,48543,0.0,0.0,0.0,0.0
+Mazda ,Cx-30,48612,Cx-30 Base,2025,24995,11.38368,67.2,0.0,2025,Mazda,CX-30 4WD,29,0.0,Regular,48612,0.0,0.0,0.0,0.0
+Audi ,Q6 E-Tron,48683,Q6 e-tron Base,2025,63800,22.835120000000003,85.7,49.1,2025,Audi,Q6 e-tron (19 inch wheels),100,33.7501,Electricity,48683,0.0,0.0,0.0,0.0
+Cadillac,Lyriq,48691,Lyriq Base,2025,57195,24.15644,92.6,50.0,2025,Cadillac,LYRIQ,92,36.008,Electricity,48691,0.0,0.0,0.0,0.0
+Chevrolet,Silverado EV,48698,Silverado EV ,2025,55000,40.994800000000005,141.0,101.0,2025,Chevrolet,Silverado EV 8WT,68,49.881,Electricity,48698,0.0,0.0,0.0,0.0
+Rivian,R1S,48742,R1S Base,2025,75900,30.50894,107.0,73.1,2025,Rivian,R1S All-Terrain Dual Large (20in),76,44.3622,Electricity,48742,0.0,0.0,0.0,0.0
+Rivian,R1T,48752,R1T Base,2025,85700,31.37288,116.0,69.2,2025,Rivian,R1T All-Terrain Dual Large (20in),76,44.3622,Electricity,48752,0.0,0.0,0.0,0.0
+Subaru,Solterra,48762,Solterra Base,2025,44995,19.023619999999998,76.6,35.7,2025,Subaru,Solterra AWD,104,32.0,Electricity,48762,0.0,0.0,0.0,0.0
+Tesla,Model Y Long Range AWD,48771,Model Y | Long Range AWD,2025,47990,18.888099999999998,74.7,36.8,2025,Tesla,Model Y Long Range RWD,125,26.8631,Electricity,48771,0.0,0.0,0.0,0.0
+Toyota,Prius,48858,Prius AWD,2025,29350,10.3334,61.0,0.0,2025,Toyota,Prius AWD,54,0.0,Regular,48858,0.0,0.0,0.0,0.0
+Ford ,Maverick AWD,48874,Maverick AWD,2025,34960,11.99352,70.8,0.0,2025,Ford,Maverick AWD,25,0.0,Regular,48874,0.0,0.0,0.0,0.0
+Toyota ,Tacoma,48877,Tacoma 4WD MT,2025,38395,15.279879999999999,90.2,0.0,2025,Toyota,Tacoma 4WD MT,20,0.0,Regular,48877,0.0,0.0,0.0,0.0
+Ford,F150 Pickup 4WD,48895,F150 | 4WD 2.7L 6Cyl,2025,41980,13.09462,77.3,0.0,2025,Ford,F150 Pickup 4WD,19,0.0,Regular,48895,0.0,0.0,0.0,0.0
+Tesla,Model 3 Performance AWD,48996,Model 3 | Performance AWD,2025,54990,18.34602,68.1,40.2,2025,Tesla,Model 3 Performance AWD,109,30.9191,Electricity,48996,0.0,0.0,0.0,0.0
+Tesla,Model S Base AWD,49124,Model S  Base,2025,74990,21.0903,75.4,49.1,2025,Tesla,Model S,124,27.1309,Electricity,49124,0.0,0.0,0.0,0.0
+Tesla,Model X Base,49125,Model X | Base,2025,79990,22.835120000000003,85.7,49.1,2025,Tesla,Model X,98,34.2466,Electricity,49125,0.0,0.0,0.0,0.0
+Toyota,BZ AWD,49127,Toyota bZ4X AWD,2025,45150,18.65094,74.4,35.7,2025,Toyota,bZ4X AWD (18inch Wheels),104,31.0,Electricity,49127,0.0,0.0,0.0,0.0
+Tesla,Cybertruck Long Range,49152,Long Range AWD,2025,82235,28.679420000000004,109.0,60.3,2025,Tesla,Cybertruck Long Range,82,40.8735,Electricity,49152,0.0,0.0,0.0,0.0
