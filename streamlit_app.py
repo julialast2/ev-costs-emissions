@@ -114,7 +114,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=None, ICEV_purchase_price= None, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price, ICEV_purchase_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -458,7 +458,7 @@ with st.sidebar:
         label='What was the purchase price of your electric vehicle?',
         min_value=0, 
         max_value=250000, 
-        value=None, 
+        value=float(EV_model_df['price'].iloc[0]), 
         step=500,
         help='If no value is chosen, the model will use MSRP')
   
@@ -473,7 +473,7 @@ with st.sidebar:
         label='What was the purchase price of your gas vehicle?',
         min_value=0, 
         max_value=250000, 
-        value=None, 
+        value=float(ICEV_model_df['price'].iloc[0]), 
         step=500,
         help='If no value is chosen, the model will use MSRP')
 
