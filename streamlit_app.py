@@ -1,5 +1,5 @@
 import streamlit as st
- streamlit run c:\users\julia\desktop\ev-costs-emissions-julia-s-edits\streamlit_app.py [ARGUMENTS]
+streamlit run c:\users\julia\desktop\ev-costs-emissions-julia-s-edits\streamlit_app.py [ARGUMENTS]
 2026-10-20 16:48:29.383 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
 2026-10-20 16:48:29.385 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
 st.set_page_config(page_title = 'Utah Clean Energy EV Tool',
