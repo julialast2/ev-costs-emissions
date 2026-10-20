@@ -114,7 +114,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price_input=None, ICEV_purchase_price_input= None, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=None, ICEV_purchase_price= None, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -145,10 +145,10 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
     EV_model_df = pd.merge(EV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
     ICEV_model_df = pd.merge(ICEV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
 
-    EV_model_df['running_cost_of_ownership'] = EV_model_df['EV_purchase_price_input'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
+    EV_model_df['running_cost_of_ownership'] = EV_model_df['EV_purchase_price'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
                                                                                                                                                                                                                                       (1.11 / 100 * miles_per_year / 12),
                                                                                                                                                                                                                                       (138.5 / 12))
-    ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['ICEV_purchase_price_input'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
+    ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['ICEV_purchase_price'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
 
     EV_model_df['ty_emissions'] = np.where(EV_model_df['cumulative_months'] != 0,
                                            EV_model_df['emissions_tCO2MWh'] / 1000 * EV_model_df['combE'] / 100 * miles_per_year / 12,
@@ -171,11 +171,11 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
 
     ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
                                                   #8,887 gCO2/gallon
-    if EV_purchase_price_input == None: 
+    if EV_purchase_price == None: 
         EV_model_df['running_cost_of_ownership'] = EV_model_df['MSRP'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
                                                                                                                                                                                                                                       (1.11 / 100 * miles_per_year / 12),
                                                                                                                                                                                                                                       (138.5 / 12))
-    if ICEV_purchase_price_input == None:
+    if ICEV_purchase_price == None:
         ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['ICEV_purchase_price_input'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
 
       
