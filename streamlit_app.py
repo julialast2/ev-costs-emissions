@@ -114,7 +114,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=0 , ICEV_purchase_price=0, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit= False):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=0 , ICEV_purchase_price=0,grid_emissions_option=1, miles_per_year=11000, apply_tax_credit= False):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
