@@ -114,7 +114,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(EV_purchase_price, ICEV_purchase_price, model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit= False):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=0 , ICEV_purchase_price=0 grid_emissions_option=1, miles_per_year=11000, apply_tax_credit= False):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -173,11 +173,11 @@ elif grid_emissions_option == 4:
 
 ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
                                                   #8,887 gCO2/gallon
-if EV_purchase_price == None: 
+if EV_purchase_price == 0: 
         EV_model_df['running_cost_of_ownership'] = EV_model_df['MSRP'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
                                                                                                                                                                                                                                       (1.11 / 100 * miles_per_year / 12),
                                                                                                                                                                                                                                       (138.5 / 12))
-if ICEV_purchase_price == None:
+if ICEV_purchase_price == 0:
         ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['MSRP'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
 
       
