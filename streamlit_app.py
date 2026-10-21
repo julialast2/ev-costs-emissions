@@ -479,12 +479,12 @@ with st.sidebar:
     
     # REPLACED CHECKBOX WITH NUMBER INPUT
     tax_credit_input = st.number_input(
-        label='**Step 4:** Enter Total EV Tax Credit ($):',
+        label='**Step 4:** Enter total EV Tax Credits/Incentives ($):',
         min_value=0.0,
         max_value=20000.0,
         value=7500.0,
         step=500.0,
-        help='Enter the total tax credit amount for the EV (e.g., $7,500 federal incentive). For more information, [click here](' + tax_credit_link + ').'
+        help='Incentives are a financial benefit provided by governments, utilities, or automakers to lower the cost of buying an EV. To find more incentives, [click here](' + tax_credit_link + ').'
     )
 
     miles_input_box = st.number_input(
