@@ -235,7 +235,7 @@ legend_patches = [mpatches.Patch(color=color,
 ax2.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
 
     ## Manufacture Emissions Bar Charts ##
-    for i, row in initial_values.iterrows():
+for i, row in initial_values.iterrows():
         fuel = row['fuelType']
         manu_emissions = row['running_emissions']
         color = color_mapping.get(fuel, 'gray')
