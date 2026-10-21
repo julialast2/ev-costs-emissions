@@ -224,15 +224,15 @@ ax2.tick_params(axis='y', colors='black')
 for label in ax2.get_xticklabels() + ax2.get_yticklabels():
         #label.set_fontweight("bold")
         label.set_fontsize(30)
-    ax2.spines['top'].set_visible(False)
-    ax2.spines['right'].set_visible(False)
-    ax2.lines[0].set_linewidth(5)
-    ax2.lines[1].set_linewidth(5)
-    ax2.legend_.remove()
-    legend_patches = [mpatches.Patch(color=color, 
+ax2.spines['top'].set_visible(False)
+ax2.spines['right'].set_visible(False)
+ax2.lines[0].set_linewidth(5)
+ax2.lines[1].set_linewidth(5)
+ax2.legend_.remove()
+legend_patches = [mpatches.Patch(color=color, 
                                      label=plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0])
                                     for label1, color in color_mapping.items()]
-    ax2.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
+ax2.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
 
     ## Manufacture Emissions Bar Charts ##
     for i, row in initial_values.iterrows():
