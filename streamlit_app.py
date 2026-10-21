@@ -211,17 +211,17 @@ sns.lineplot(data=plot_func_df,
                 hue='fuelType',
                 palette=color_mapping,
                 ax=ax2)
-    ax2.set_title('\n')
-    ax2.set_xlabel('\n Years of Ownership \n', fontsize=32)#, fontweight='bold')
-    ax2.set_ylabel('\n Emissions (tCO₂) \n', fontsize=40)
-    ax2.set_ylim(bottom = 0)
-    ax2.set_xlim(-2, 182)
-    xtick_positions = range(0, 181, 12)
-    ax2.set_xticks(xtick_positions)
-    ax2.set_xticklabels([f"{m//12}" for m in xtick_positions])
-    ax2.tick_params(axis='x', colors='black')
-    ax2.tick_params(axis='y', colors='black')
-    for label in ax2.get_xticklabels() + ax2.get_yticklabels():
+ax2.set_title('\n')
+ax2.set_xlabel('\n Years of Ownership \n', fontsize=32)#, fontweight='bold')
+ax2.set_ylabel('\n Emissions (tCO₂) \n', fontsize=40)
+ax2.set_ylim(bottom = 0)
+ax2.set_xlim(-2, 182)
+xtick_positions = range(0, 181, 12)
+ax2.set_xticks(xtick_positions)
+ax2.set_xticklabels([f"{m//12}" for m in xtick_positions])
+ax2.tick_params(axis='x', colors='black')
+ax2.tick_params(axis='y', colors='black')
+for label in ax2.get_xticklabels() + ax2.get_yticklabels():
         #label.set_fontweight("bold")
         label.set_fontsize(30)
     ax2.spines['top'].set_visible(False)
