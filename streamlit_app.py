@@ -33,12 +33,12 @@ def emissions_intersection_point_months(df_EV, df_ICEV):
     df_comp['diff_sign'] = np.sign(df_comp['diff'])
     df_comp['ly_diff_sign'] = df_comp['diff_sign'].shift(1)
     df_comp['is_intersection_point'] = np.where((df_comp['diff_sign'] != df_comp['ly_diff_sign']) & (df_comp['cumulative_months'] > 1), 
-                                            1, 
-                                            0)
+                                                1, 
+                                                0)
     #if there is an exact match, set the intersection point to 2
     df_comp['is_intersection_point'] = np.where((df_comp['diff_sign'] == 0),
-                                            2,
-                                            df_comp['is_intersection_point'])
+                                                2,
+                                                df_comp['is_intersection_point'])
 
     df_return = df_comp[df_comp['is_intersection_point'] > 0][['cumulative_months', 'EV_running_emissions', 'ICEV_running_emissions']]
     #select row with max intersection point
@@ -71,12 +71,12 @@ def cost_intersection_point_months(df_EV, df_ICEV):
     df_comp['diff_sign'] = np.sign(df_comp['diff'])
     df_comp['ly_diff_sign'] = df_comp['diff_sign'].shift(1)
     df_comp['is_intersection_point'] = np.where((df_comp['diff_sign'] != df_comp['ly_diff_sign']) & (df_comp['cumulative_months'] > 1), 
-                                            1, 
-                                            0)
+                                                1, 
+                                                0)
     #if there is an exact match, set the intersection point to 2
     df_comp['is_intersection_point'] = np.where((df_comp['diff_sign'] == 0),
-                                            2,
-                                            df_comp['is_intersection_point'])
+                                                2,
+                                                df_comp['is_intersection_point'])
 
     df_return = df_comp[df_comp['is_intersection_point'] > 0][['cumulative_months', 'EV_running_cost', 'ICEV_running_cost']]
     #select row with max intersection point
@@ -115,7 +115,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False, ev_purchase_price=None, icev_purchase_price=None):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, tax_credit_amount=0.0, ev_purchase_price=None, icev_purchase_price=None):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -148,13 +148,13 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     ICEV_model_df = pd.merge(ICEV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
 
     EV_model_df['running_cost_of_ownership'] = ev_cost_basis + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
-                                                                                                                                                                                                                                      (1.11 / 100 * miles_per_year / 12),
-                                                                                                                                                                                                                                      (138.5 / 12))
+                                                                                                                                                                                                                                                          (1.11 / 100 * miles_per_year / 12),
+                                                                                                                                                                                                                                                          (138.5 / 12))
     ICEV_model_df['running_cost_of_ownership'] = icev_cost_basis + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
 
     EV_model_df['ty_emissions'] = np.where(EV_model_df['cumulative_months'] != 0,
-                                           EV_model_df['emissions_tCO2MWh'] / 1000 * EV_model_df['combE'] / 100 * miles_per_year / 12,
-                                           0)
+                                         EV_model_df['emissions_tCO2MWh'] / 1000 * EV_model_df['combE'] / 100 * miles_per_year / 12,
+                                         0)
     EV_model_df['starting_emissions'] = np.where(EV_model_df['cumulative_months'] == 0, 
                                                  EV_model_df['Manufacture_Emissions_tCO2'], 
                                                  0)
@@ -172,7 +172,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
         EV_model_df['running_emissions'] = EV_model_df['Manufacture_Emissions_tCO2']
 
     ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
-                                                  #8,887 gCO2/gallon
+                                                    #8,887 gCO2/gallon
   
     intersection_point_emissions = emissions_intersection_point_months(EV_model_df, ICEV_model_df)
     intersection_point_cost = cost_intersection_point_months(EV_model_df, ICEV_model_df)
@@ -222,8 +222,8 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     ax2.lines[1].set_linewidth(5)
     ax2.legend_.remove()
     legend_patches = [mpatches.Patch(color=color, 
-                                     label=plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0])
-                                    for label1, color in color_mapping.items()]
+                                   label=plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0])
+                                   for label1, color in color_mapping.items()]
     ax2.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
 
     ## Manufacture Emissions Bar Charts ##
@@ -240,14 +240,12 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
             height=manu_emissions, 
             width=2, 
             color=color, 
-            #label=f"{fuel} (Initial Cost)", 
-            #zorder=5
         )
     
 
-    if apply_tax_credit:
-        tax_credit_EV_df = EV_model_df
-        tax_credit_EV_df['running_cost_of_ownership'] = tax_credit_EV_df['running_cost_of_ownership'] - 7500
+    if tax_credit_amount > 0:
+        tax_credit_EV_df = EV_model_df.copy()
+        tax_credit_EV_df['running_cost_of_ownership'] = tax_credit_EV_df['running_cost_of_ownership'] - tax_credit_amount
         tax_credit_EV_df['fuelType'] = '(w/ Tax Credit)'
         plot_func_df.loc[plot_func_df['fuelType'] == 'Electricity', 'fuelType'] = '(w/o Tax Credit)'        
         plot_func_df = pd.concat([plot_func_df, tax_credit_EV_df])
@@ -260,25 +258,14 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     ### Interesection Points ###
 
     if intersection_point_cost[0] != 0:
-        # axs[0].annotate('Breakeven by year ' + str(intersection_point_cost[0]), 
-        #                 xy= (intersection_point_cost[0], intersection_point_cost[1]), 
-        #                 xytext=(intersection_point_cost[0] - 6, intersection_point_cost[1] + 4000), 
-        #                 arrowprops=dict(facecolor='black', shrink=0.05))
-        # axs[0].text(x = intersection_point_cost[0] - 4, 
-        #             y = intersection_point_cost[1] + 2000, 
-        #             s = f'${round(intersection_point_cost[1], 2)}', fontsize=12)
         ax1.vlines(x = intersection_point_cost[0], 
                    ymin = 0, 
                    ymax = intersection_point_cost[1], 
                    color = 'grey', 
-                   #linestyles='dashed',
                    linestyle=(0, (10, 4)) #dashed line
                    )
 
     if intersection_point_emissions[0] != 0:
-        # axs[1].text(x = intersection_point_emissions[0] - 4, 
-        #             y = intersection_point_emissions[1] + 0.25, 
-        #             s = f'{round(intersection_point_emissions[1], 2)} tCO2', fontsize=12)
         ax2.vlines(x = intersection_point_emissions[0], 
                    ymin = 0, 
                    ymax = intersection_point_emissions[1], 
@@ -302,30 +289,28 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     ax1.set_ylabel('\n Cost of Ownership ($) \n', fontsize=40)
     ax1.set_ylim(bottom = 0)
     ax1.set_xlim(-2, 182)
-    #xtick_positions = range(12, 181, 12)
     ax1.set_xticks(xtick_positions)
     ax1.set_xticklabels([f"{m//12}" for m in xtick_positions])
     ax1.tick_params(axis='x', colors='black')
     ax1.tick_params(axis='y', colors='black')
     for label in ax1.get_xticklabels() + ax1.get_yticklabels():
-        #label.set_fontweight("bold")
         label.set_fontsize(30)
     ax1.spines['top'].set_visible(False)
     ax1.spines['right'].set_visible(False)
     ax1.lines[0].set_linewidth(5)
     ax1.lines[1].set_linewidth(5)
-    if apply_tax_credit:
+    if tax_credit_amount > 0:
         ax1.lines[0].set_linewidth(2) #set old EV line to thin
         ax1.lines[2].set_linewidth(5)
         legend_patches = [mpatches.Patch(color=color, 
-                                         label=(plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0] + " " + label1)
-                                         if not plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].empty else label1) 
-                                         for label1, color in color_mapping.items()]
+                                       label=(plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0] + " " + label1)
+                                       if not plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].empty else label1) 
+                                       for label1, color in color_mapping.items()]
     else:
         legend_patches = [mpatches.Patch(color=color, 
-                                         label=plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0]
-                                         if not plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].empty else label1)
-                                         for label1, color in color_mapping.items()]
+                                       label=plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0]
+                                       if not plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].empty else label1)
+                                       for label1, color in color_mapping.items()]
     ax1.legend_.remove()
     ax1.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
 
@@ -382,7 +367,6 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     with met1_col1:
         st.metric(label = "Cost Breakeven: ",
             value = breakeven_value_cost,
-            #value = str(int(intersection_point_cost[0]/12)) + str(np.where(((intersection_point_cost[0]/12) == 1), ' Year', ' Years')), 
             label_visibility = "visible",
             help = "The year during which the running lifetime cost of ownership of the EV is less than the ICEV")
 
@@ -412,14 +396,14 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     with met2_col2:
         vehicle_age_link = 'https://www.bts.gov/content/average-age-automobiles-and-trucks-operation-united-states'
         st.metric(label = "Lifetime Saved Emissions: ", 
-                  value = str(lifetime_emissions_savings) + " tCO2",
-                  label_visibility = "visible",
-                  help = f"Assuming 14 years of ownership--the [average age of cars passenger cars in operation]({vehicle_age_link}) in the United States")
+                    value = str(lifetime_emissions_savings) + " tCO2",
+                    label_visibility = "visible",
+                    help = f"Assuming 14 years of ownership--the [average age of cars passenger cars in operation]({vehicle_age_link}) in the United States")
     with met2_col1:
         st.metric(label = "Emissions Breakeven: ",
-                  value = breakeven_value_emissions,
-                  label_visibility = "visible",
-                  help = "The year during which the running lifetime emissions of the EV is less than the ICEV")
+                    value = breakeven_value_emissions,
+                    label_visibility = "visible",
+                    help = "The year during which the running lifetime emissions of the EV is less than the ICEV")
     
 def add_make_to_model(model):
     make = vehicles_df[vehicles_df['model'] == model]['make'].values[0]
@@ -482,7 +466,6 @@ with st.sidebar:
         value=3.20,
         help='Default set to the average price of gas in Utah: $3.20/gallon',
         label_visibility="visible")
-        #on_change=)
         
     electricity_slider = st.slider(
         label='Electricity Price ($/kWh):',
@@ -493,11 +476,16 @@ with st.sidebar:
         label_visibility="visible")
 
     tax_credit_link = 'https://homes.rewiringamerica.org/federal-incentives/30d-new-ev-tax-incentive'
-    tax_credit_checkbox = st.checkbox(
-        label='**Step 4:** Apply Full Federal Tax Credit?',
-        help='Check this box to include the full, $7,500 Federal Tax Credit for EVs.  For more information, [click here](' + tax_credit_link + ').',
-        value=True
-        )
+    
+    # REPLACED CHECKBOX WITH NUMBER INPUT
+    tax_credit_input = st.number_input(
+        label='**Step 4:** Enter Total EV Tax Credit ($):',
+        min_value=0.0,
+        max_value=20000.0,
+        value=7500.0,
+        step=500.0,
+        help='Enter the total tax credit amount for the EV (e.g., $7,500 federal incentive). For more information, [click here](' + tax_credit_link + ').'
+    )
 
     miles_input_box = st.number_input(
         label='**Step 5:** How Many Miles Do You Drive per Year?',
@@ -511,9 +499,9 @@ with st.sidebar:
         label='**Step 6:** Choose an Energy Mix to Charge Your EV:', 
         options=[1,2,3,4],
         captions=["Rocky Mountain Power's Planned Energy Mix", 
-                  "Assuming No Changes to Rocky Mountain Power's 2023 Energy Mix", 
-                  "Hypothetical 100% Coal Energy Mix", 
-                  "Charge with Rooftop Solar or Fully Clean Grid"],
+                "Assuming No Changes to Rocky Mountain Power's 2023 Energy Mix", 
+                "Hypothetical 100% Coal Energy Mix", 
+                "Charge with Rooftop Solar or Fully Clean Grid"],
         format_func=radio_button_output
         )
     
@@ -522,9 +510,17 @@ with st.sidebar:
     st.write('To learn more about this tool, read [How This Tool Works](https://hub.utahcleanenergy.org/wp-content/uploads/2025/04/How-This-Tool-Works.pdf)')
     st.write('Created By Adrian Martino')
 
-plot_cars(model_1=EV_dropdown, model_2=ICEV_dropdown, gas_price=gas_price_slider, kwh_price=electricity_slider, grid_emissions_option=grid_emissions_radio_buttons, miles_per_year=miles_input_box, apply_tax_credit=tax_credit_checkbox, ev_purchase_price=ev_purchase_price_input,
-    icev_purchase_price=icev_purchase_price_input)
+plot_cars(
+    model_1=EV_dropdown, 
+    model_2=ICEV_dropdown, 
+    gas_price=gas_price_slider, 
+    kwh_price=electricity_slider, 
+    grid_emissions_option=grid_emissions_radio_buttons, 
+    miles_per_year=miles_input_box, 
+    tax_credit_amount=tax_credit_input, 
+    ev_purchase_price=ev_purchase_price_input,
+    icev_purchase_price=icev_purchase_price_input
+)
 
 st.markdown(' ')
 st.markdown(' ')
-
