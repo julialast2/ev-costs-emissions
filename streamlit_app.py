@@ -189,9 +189,9 @@ lifetime_emissions_savings = calculate_lifetime_emissions_savings(EV_model_df, I
     
 plot_func_df = pd.concat([EV_model_df, ICEV_model_df])
 
-    UCE_blue = '#016495'
-    UCE_red = '#D84829'
-    color_mapping = {'Electricity': f'{UCE_blue}', 'Regular': f'{UCE_red}'}
+UCE_blue = '#016495'
+UCE_red = '#D84829'
+color_mapping = {'Electricity': f'{UCE_blue}', 'Regular': f'{UCE_red}'}
 
     ## For MSRP/Manufacture Emissions Bar Charts ##
     initial_values = plot_func_df[plot_func_df['cumulative_months'] == 0]
