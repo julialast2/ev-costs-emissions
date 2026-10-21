@@ -16,6 +16,8 @@ import numpy as np
 
 vehicles_df = pd.read_csv('data/vehicledata.csv')
 grid_emissions_df = pd.read_csv('data/grid_emissions_forecast.csv')
+default_ev_price = float(EV_model_df['price'].iloc[0])
+default_icev_price = float(ICEV_model_df['price'].iloc[0])
 
 def emissions_intersection_point_months(df_EV, df_ICEV):
     #Takes two dataframes, one for EV and one for ICEV, and returns the month and emissions at which the two intersect
@@ -156,8 +158,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
     EV_model_df['starting_emissions'] = np.where(EV_model_df['cumulative_months'] == 0, 
                                                  EV_model_df['Manufacture_Emissions_tCO2'], 
                                                  0)
-default_ev_price = float(EV_model_df['price'].iloc[0])
-default_icev_price = float(ICEV_model_df['price'].iloc[0])
+
 
 if grid_emissions_option == 1:
         EV_model_df['ty_plus'] = EV_model_df['ty_emissions'] + EV_model_df['starting_emissions']
