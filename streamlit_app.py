@@ -475,7 +475,7 @@ with st.sidebar:
         help='Default set to the average cost of electricity in Utah: $0.12/kWh',
         label_visibility="visible")
 
-    tax_credit_link = 'https://homes.rewiringamerica.org/federal-incentives/30d-new-ev-tax-incentive'
+    tax_credit_link = 'https://deq.utah.gov/daq/incentives-aq/air-quality-incentive-programs'
     
     # REPLACED CHECKBOX WITH NUMBER INPUT
     tax_credit_input = st.number_input(
@@ -509,7 +509,7 @@ with st.sidebar:
     st.markdown(' ')
     st.write('To learn more about this tool, read [How This Tool Works](https://hub.utahcleanenergy.org/wp-content/uploads/2025/04/How-This-Tool-Works.pdf)')
     st.write('Created By Adrian Martino')
-
+    st.write('Updated by Julia Last')
 plot_cars(
     model_1=EV_dropdown, 
     model_2=ICEV_dropdown, 
