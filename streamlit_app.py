@@ -114,7 +114,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price, ICEV_purchase_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price = default_EV_price, ICEV_purchase_price = default_icev_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -141,7 +141,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
     ICEV_model_df = pd.merge(ICEV_model_df, time_of_ownership_df, how='cross')
 
     grid_emissions_df['merge_year'] = grid_emissions_df['forecast_year'] - 2025
-
+  
     EV_model_df = pd.merge(EV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
     ICEV_model_df = pd.merge(ICEV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
 
@@ -156,6 +156,8 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
     EV_model_df['starting_emissions'] = np.where(EV_model_df['cumulative_months'] == 0, 
                                                  EV_model_df['Manufacture_Emissions_tCO2'], 
                                                  0)
+default_ev_price = float(EV_model_df['price'].iloc[0])
+default_icev_price = float(ICEV_model_df['price'].iloc[0])
 
     if grid_emissions_option == 1:
         EV_model_df['ty_plus'] = EV_model_df['ty_emissions'] + EV_model_df['starting_emissions']
