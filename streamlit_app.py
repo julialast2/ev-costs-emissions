@@ -159,7 +159,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
 default_ev_price = float(EV_model_df['price'].iloc[0])
 default_icev_price = float(ICEV_model_df['price'].iloc[0])
 
-  if grid_emissions_option == 1:
+if grid_emissions_option == 1:
         EV_model_df['ty_plus'] = EV_model_df['ty_emissions'] + EV_model_df['starting_emissions']
         EV_model_df['running_emissions'] = EV_model_df['ty_plus'].cumsum()
     elif grid_emissions_option == 2:
