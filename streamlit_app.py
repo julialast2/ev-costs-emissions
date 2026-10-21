@@ -475,7 +475,7 @@ with st.sidebar:
         help='Default set to the average cost of electricity in Utah: $0.12/kWh',
         label_visibility="visible")
 
-    tax_credit_link = 'https://deq.utah.gov/daq/incentives-aq/air-quality-incentive-programs'
+    tax_credit_link = 'https://incentivefinder.utah.gov/'
     
     # REPLACED CHECKBOX WITH NUMBER INPUT
     tax_credit_input = st.number_input(
@@ -484,7 +484,7 @@ with st.sidebar:
         max_value=20000.0,
         value=7500.0,
         step=500.0,
-        help=f'Incentives are a financial benefit provided by governments, utilities, or automakers to lower the cost of buying an EV. To find more incentives,[click here](' + tax_credit_link + ').',
+        help=f'Incentives are a financial benefit provided by governments, utilities, or automakers to lower the cost of buying an EV. To find more incentives, [click here](' + tax_credit_link + ').',
     )
 
     miles_input_box = st.number_input(
