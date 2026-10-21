@@ -484,7 +484,7 @@ with st.sidebar:
         max_value=20000.0,
         value=7500.0,
         step=500.0,
-        help='Incentives are a financial benefit provided by governments, utilities, or automakers to lower the cost of buying an EV. To find more incentives, [click here](' + tax_credit_link + ').'
+        help='Incentives are a financial benefit provided by governments, utilities, or automakers to lower the cost of buying an EV. To find more incentives, [click here] (' + tax_credit_link + ').'
     )
 
     miles_input_box = st.number_input(
