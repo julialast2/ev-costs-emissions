@@ -16,8 +16,6 @@ import numpy as np
 
 vehicles_df = pd.read_csv('data/vehicledata.csv')
 grid_emissions_df = pd.read_csv('data/grid_emissions_forecast.csv')
-default_ev_price = float(EV_model_df['price'].iloc[0])
-default_icev_price = float(ICEV_model_df['price'].iloc[0])
 
 def emissions_intersection_point_months(df_EV, df_ICEV):
     #Takes two dataframes, one for EV and one for ICEV, and returns the month and emissions at which the two intersect
@@ -130,7 +128,10 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
 
     EV_model_df = vehicles_df[vehicles_df['model'] == model_1]
     ICEV_model_df = vehicles_df[vehicles_df['model'] == model_2]
-
+  
+    default_ev_price = float(EV_model_df['MSRP'].iloc[0])
+    default_icev_price = float(ICEV_model_df['MSRP'].iloc[0])
+  
     years_of_ownership_df = pd.DataFrame({'years_of_ownership': range(0,21)})
     months_of_ownership_df = pd.DataFrame({'months_of_ownership': range(1, 13)})
     time_of_ownership_df = pd.merge(years_of_ownership_df, months_of_ownership_df, how='cross')
