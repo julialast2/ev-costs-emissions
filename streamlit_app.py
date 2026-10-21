@@ -253,7 +253,7 @@ for i, row in initial_values.iterrows():
         )
     
 
-    if apply_tax_credit:
+if apply_tax_credit:
         tax_credit_EV_df = EV_model_df
         tax_credit_EV_df['running_cost_of_ownership'] = tax_credit_EV_df['running_cost_of_ownership'] - incentives_input
         tax_credit_EV_df['fuelType'] = '(w/ incentives)'
@@ -263,11 +263,11 @@ for i, row in initial_values.iterrows():
         intersection_point_cost = cost_intersection_point_months(tax_credit_EV_df, ICEV_model_df)
         lifetime_cost_savings = calculate_lifetime_cost_savings(tax_credit_EV_df, ICEV_model_df)
 
-    initial_values = plot_func_df[plot_func_df['cumulative_months'] == 0]
+initial_values = plot_func_df[plot_func_df['cumulative_months'] == 0]
 
     ### Interesection Points ###
 
-    if intersection_point_cost[0] != 0:
+if intersection_point_cost[0] != 0:
         # axs[0].annotate('Breakeven by year ' + str(intersection_point_cost[0]), 
         #                 xy= (intersection_point_cost[0], intersection_point_cost[1]), 
         #                 xytext=(intersection_point_cost[0] - 6, intersection_point_cost[1] + 4000), 
@@ -283,7 +283,7 @@ for i, row in initial_values.iterrows():
                    linestyle=(0, (10, 4)) #dashed line
                    )
 
-    if intersection_point_emissions[0] != 0:
+if intersection_point_emissions[0] != 0:
         # axs[1].text(x = intersection_point_emissions[0] - 4, 
         #             y = intersection_point_emissions[1] + 0.25, 
         #             s = f'{round(intersection_point_emissions[1], 2)} tCO2', fontsize=12)
@@ -296,33 +296,33 @@ for i, row in initial_values.iterrows():
    
     ### Cost Plot ###
 
-    sns.lineplot(data=plot_func_df, 
+sns.lineplot(data=plot_func_df, 
                 x='cumulative_months', 
                 y='running_cost_of_ownership', 
                 hue='fuelType',
                 palette=color_mapping,
                 ax=ax1)
-    cost_formatter = ticker.FuncFormatter(lambda x, pos: f'${x:,.0f}')
-    ax1.yaxis.set_major_formatter(cost_formatter)
-    ax1.yaxis.set_minor_formatter(cost_formatter)
-    ax1.set_title('\n')
-    ax1.set_xlabel('\n Years of Ownership \n', fontsize=32)#, fontweight='bold')
-    ax1.set_ylabel('\n Cost of Ownership ($) \n', fontsize=40)
-    ax1.set_ylim(bottom = 0)
-    ax1.set_xlim(-2, 182)
-    #xtick_positions = range(12, 181, 12)
-    ax1.set_xticks(xtick_positions)
-    ax1.set_xticklabels([f"{m//12}" for m in xtick_positions])
-    ax1.tick_params(axis='x', colors='black')
-    ax1.tick_params(axis='y', colors='black')
-    for label in ax1.get_xticklabels() + ax1.get_yticklabels():
+cost_formatter = ticker.FuncFormatter(lambda x, pos: f'${x:,.0f}')
+ax1.yaxis.set_major_formatter(cost_formatter)
+ax1.yaxis.set_minor_formatter(cost_formatter)
+ax1.set_title('\n')
+ax1.set_xlabel('\n Years of Ownership \n', fontsize=32)#, fontweight='bold')
+ax1.set_ylabel('\n Cost of Ownership ($) \n', fontsize=40)
+ax1.set_ylim(bottom = 0)
+ax1.set_xlim(-2, 182)
+#xtick_positions = range(12, 181, 12)
+ax1.set_xticks(xtick_positions)
+ax1.set_xticklabels([f"{m//12}" for m in xtick_positions])
+ax1.tick_params(axis='x', colors='black')
+ax1.tick_params(axis='y', colors='black')
+for label in ax1.get_xticklabels() + ax1.get_yticklabels():
         #label.set_fontweight("bold")
         label.set_fontsize(30)
-    ax1.spines['top'].set_visible(False)
-    ax1.spines['right'].set_visible(False)
-    ax1.lines[0].set_linewidth(5)
-    ax1.lines[1].set_linewidth(5)
-    if apply_tax_credit:
+ax1.spines['top'].set_visible(False)
+ax1.spines['right'].set_visible(False)
+ax1.lines[0].set_linewidth(5)
+ax1.lines[1].set_linewidth(5)
+if apply_tax_credit:
         ax1.lines[0].set_linewidth(2) #set old EV line to thin
         ax1.lines[2].set_linewidth(5)
         legend_patches = [mpatches.Patch(color=color, 
