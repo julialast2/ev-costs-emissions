@@ -182,10 +182,10 @@ if ICEV_purchase_price == None:
 
       
   
-    intersection_point_emissions = emissions_intersection_point_months(EV_model_df, ICEV_model_df)
-    intersection_point_cost = cost_intersection_point_months(EV_model_df, ICEV_model_df)
-    lifetime_cost_savings = calculate_lifetime_cost_savings(EV_model_df, ICEV_model_df)
-    lifetime_emissions_savings = calculate_lifetime_emissions_savings(EV_model_df, ICEV_model_df)
+intersection_point_emissions = emissions_intersection_point_months(EV_model_df, ICEV_model_df)
+intersection_point_cost = cost_intersection_point_months(EV_model_df, ICEV_model_df)
+lifetime_cost_savings = calculate_lifetime_cost_savings(EV_model_df, ICEV_model_df)
+lifetime_emissions_savings = calculate_lifetime_emissions_savings(EV_model_df, ICEV_model_df)
     
     plot_func_df = pd.concat([EV_model_df, ICEV_model_df])
 
