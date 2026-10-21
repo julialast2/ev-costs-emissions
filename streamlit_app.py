@@ -194,9 +194,9 @@ UCE_red = '#D84829'
 color_mapping = {'Electricity': f'{UCE_blue}', 'Regular': f'{UCE_red}'}
 
     ## For MSRP/Manufacture Emissions Bar Charts ##
-    initial_values = plot_func_df[plot_func_df['cumulative_months'] == 0]
+initial_values = plot_func_df[plot_func_df['cumulative_months'] == 0]
 
-    position_by_fuelType = {
+position_by_fuelType = {
         "(w/o incentives)": -1,
         "(w/ incentives)": -1,
         "Regular": 1,
@@ -205,7 +205,7 @@ color_mapping = {'Electricity': f'{UCE_blue}', 'Regular': f'{UCE_red}'}
 
     ### Emissions Plot ###
 
-    sns.lineplot(data=plot_func_df, 
+sns.lineplot(data=plot_func_df, 
                 x='cumulative_months', 
                 y='running_emissions', 
                 hue='fuelType',
