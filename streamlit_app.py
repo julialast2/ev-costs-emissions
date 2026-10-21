@@ -456,7 +456,7 @@ with st.sidebar:
         label='What was the purchase price of your electric vehicle?',
         min_value=0, 
         max_value=250000, 
-        value=default_ev_price, 
+        value=float(EV_model_df['MSRP'].iloc[0]), 
         step=500,
         help='If no value is chosen, the model will use MSRP')
   
@@ -471,7 +471,7 @@ with st.sidebar:
         label='What was the purchase price of your gas vehicle?',
         min_value=0, 
         max_value=250000, 
-        value= default_icev_price, 
+        value= float(ICEV_model_df['MSRP'].iloc[0]), 
         step=500,
         help='If no value is chosen, the model will use MSRP')
   
