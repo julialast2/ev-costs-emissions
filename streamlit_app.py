@@ -115,7 +115,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False, ev_purchase_price=None, icev_purchase_price=None):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -129,7 +129,8 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
 
     EV_model_df = vehicles_df[vehicles_df['model'] == model_1]
     ICEV_model_df = vehicles_df[vehicles_df['model'] == model_2]
-
+    ev_cost_basis = ev_purchase_price if ev_purchase_price is not None else EV_model_df['MSRP'].values[0]
+    icev_cost_basis = icev_purchase_price if icev_purchase_price is not None else ICEV_model_df['MSRP'].values[0]
     years_of_ownership_df = pd.DataFrame({'years_of_ownership': range(0,21)})
     months_of_ownership_df = pd.DataFrame({'months_of_ownership': range(1, 13)})
     time_of_ownership_df = pd.merge(years_of_ownership_df, months_of_ownership_df, how='cross')
@@ -146,10 +147,10 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_o
     EV_model_df = pd.merge(EV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
     ICEV_model_df = pd.merge(ICEV_model_df, grid_emissions_df, how='left', left_on=['years_of_ownership'], right_on=['merge_year'])
 
-    EV_model_df['running_cost_of_ownership'] = EV_model_df['MSRP'] + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
+    EV_model_df['running_cost_of_ownership'] = ev_cost_basis + (1013 * 0.65 * EV_model_df['cumulative_months']/12) + (miles_per_year * EV_model_df['combE'] / 100 * kwh_price * EV_model_df['cumulative_months']/12) + np.where(((1.11 / 100 * miles_per_year) < 138.5),
                                                                                                                                                                                                                                       (1.11 / 100 * miles_per_year / 12),
                                                                                                                                                                                                                                       (138.5 / 12))
-    ICEV_model_df['running_cost_of_ownership'] = ICEV_model_df['MSRP'] + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
+    ICEV_model_df['running_cost_of_ownership'] = icev_cost_basis + (1013 * ICEV_model_df['cumulative_months']/12) + (miles_per_year / ICEV_model_df['comb08'] * gas_price * ICEV_model_df['cumulative_months']/12)
 
     EV_model_df['ty_emissions'] = np.where(EV_model_df['cumulative_months'] != 0,
                                            EV_model_df['emissions_tCO2MWh'] / 1000 * EV_model_df['combE'] / 100 * miles_per_year / 12,
@@ -453,7 +454,26 @@ with st.sidebar:
         index = 5,
         format_func = add_make_to_model
         )
-    
+    default_ev_msrp = float(vehicles_df[vehicles_df['model'] == EV_dropdown]['MSRP'].values[0])
+    default_icev_msrp = float(vehicles_df[vehicles_df['model'] == ICEV_dropdown]['MSRP'].values[0])
+  
+    ev_purchase_price_input = st.number_input(
+        label='EV Purchase Price ($):',
+        min_value=0.0,
+        max_value=200000.0,
+        value=default_ev_msrp,
+        step=500.0,
+        help='Default is set to the manufacturer suggested retail price (MSRP).'
+    )
+
+    icev_purchase_price_input = st.number_input(
+        label='Gas Vehicle Purchase Price ($):',
+        min_value=0.0,
+        max_value=200000.0,
+        value=default_icev_msrp,
+        step=500.0,
+        help='Default is set to the manufacturer suggested retail price (MSRP).'
+    )
     st.write('**Step 3:** Set Your Gas and Electricity Prices:')
     gas_price_slider = st.slider(
         label='Gas Price ($/gallon):', 
@@ -502,7 +522,8 @@ with st.sidebar:
     st.write('To learn more about this tool, read [How This Tool Works](https://hub.utahcleanenergy.org/wp-content/uploads/2025/04/How-This-Tool-Works.pdf)')
     st.write('Created By Adrian Martino')
 
-plot_cars(model_1=EV_dropdown, model_2=ICEV_dropdown, gas_price=gas_price_slider, kwh_price=electricity_slider, grid_emissions_option=grid_emissions_radio_buttons, miles_per_year=miles_input_box, apply_tax_credit=tax_credit_checkbox)
+plot_cars(model_1=EV_dropdown, model_2=ICEV_dropdown, gas_price=gas_price_slider, kwh_price=electricity_slider, grid_emissions_option=grid_emissions_radio_buttons, miles_per_year=miles_input_box, apply_tax_credit=tax_credit_checkbox, ev_purchase_price=ev_purchase_price_input,
+    icev_purchase_price=icev_purchase_price_input)
 
 st.markdown(' ')
 st.markdown(' ')
