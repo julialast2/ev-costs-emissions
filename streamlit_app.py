@@ -113,9 +113,16 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
         lifetime_savings = 0
     lifetime_savings = "{:,.0f}".format(lifetime_savings)
     return lifetime_savings
+  
+def default_ev_price:
+    try: 
+        float(EV_model_df['MSRP'].iloc[0])
+      
+def default_icev_price:
+    try: 
+        float(ICEV_model_df['MSRP'].iloc[0])
 
-
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=default_ev_price, ICEV_purchase_price=default_icev_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -446,14 +453,30 @@ with st.sidebar:
         index=8,
         format_func=add_make_to_model
         )
-    
+  
+    EV_purchase_price_input = st.number_input(
+        label='What was the purchase price of your electric vehicle?',
+        min_value=0, 
+        max_value=250000, 
+        value=default_ev_price, 
+        step=500,
+        help='If no value is chosen, the model will use MSRP')
+  
     ICEV_dropdown = st.selectbox(
         label = '**Step 2:** Choose Your Gas Vehicle:',
         options = vehicles_df[vehicles_df['fuelType'] == 'Regular']['model'],
         index = 5,
         format_func = add_make_to_model
         )
-    
+  
+    ICEV_purchase_price_input = st.number_input(
+        label='What was the purchase price of your gas vehicle?',
+        min_value=0, 
+        max_value=250000, 
+        value=float(ICEV_model_df['price'].iloc[0]), 
+        step=500,
+        help='If no value is chosen, the model will use MSRP')
+  
     st.write('**Step 3:** Set Your Gas and Electricity Prices:')
     gas_price_slider = st.slider(
         label='Gas Price ($/gallon):', 
@@ -505,7 +528,7 @@ with st.sidebar:
     st.write('To learn more about this tool, read [How This Tool Works](https://hub.utahcleanenergy.org/wp-content/uploads/2025/04/How-This-Tool-Works.pdf)')
     st.write('Created By Adrian Martino')
 
-plot_cars(model_1=EV_dropdown, model_2=ICEV_dropdown, gas_price=gas_price_slider, kwh_price=electricity_slider, grid_emissions_option=grid_emissions_radio_buttons, miles_per_year=miles_input_box, apply_tax_credit=incentives_input)
+plot_cars(model_1=EV_dropdown, model_2=ICEV_dropdown, gas_price=gas_price_slider, kwh_price=electricity_slider, EV_purchase_price=EV_purchase_price_input, ICEV_purchase_price=ICEV_purchase_price_input, grid_emissions_option=grid_emissions_radio_buttons, miles_per_year=miles_input_box, apply_tax_credit=incentives_input)
 
 st.markdown(' ')
 st.markdown(' ')
