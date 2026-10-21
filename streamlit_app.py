@@ -329,16 +329,16 @@ if apply_tax_credit:
                                          label=(plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0] + " " + label1)
                                          if not plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].empty else label1) 
                                          for label1, color in color_mapping.items()]
-    else:
+else:
         legend_patches = [mpatches.Patch(color=color, 
                                          label=plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].iloc[0]
                                          if not plot_func_df.loc[plot_func_df['fuelType'] == label1, 'model'].empty else label1)
                                          for label1, color in color_mapping.items()]
-    ax1.legend_.remove()
-    ax1.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
+ax1.legend_.remove()
+ax1.legend(handles=legend_patches, title="Model", fontsize=28, title_fontsize=32)
 
     ## MSRP Bar Charts ##
-    for i, row in initial_values.iterrows():
+for i, row in initial_values.iterrows():
         fuel = row['fuelType']
         MSRP = row['running_cost_of_ownership']
         color = color_mapping.get(fuel, 'gray')
