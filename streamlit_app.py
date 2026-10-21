@@ -114,10 +114,10 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     lifetime_savings = "{:,.0f}".format(lifetime_savings)
     return lifetime_savings
   
-def default_ev_price() =
+def default_ev_price():
         float(EV_model_df['MSRP'].iloc[0])
       
-def default_icev_price() = 
+def default_icev_price(): 
         float(ICEV_model_df['MSRP'].iloc[0])
 
 def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price=default_ev_price, ICEV_purchase_price=default_icev_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=False):
