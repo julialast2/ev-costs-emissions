@@ -103,6 +103,9 @@ def calculate_lifetime_cost_savings(df_EV, df_ICEV):
     lifetime_savings = "{:,.0f}".format(lifetime_savings)
     return lifetime_savings
 
+    default_ev_price = float(EV_model_df['MSRP'].iloc[0])
+    default_icev_price = float(ICEV_model_df['MSRP'].iloc[0])
+  
 def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     try:
         EV_lifetime_emissions = df_EV[df_EV['cumulative_months'] == 168]['running_emissions'].values[0]
@@ -128,10 +131,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
 
     EV_model_df = vehicles_df[vehicles_df['model'] == model_1]
     ICEV_model_df = vehicles_df[vehicles_df['model'] == model_2]
-  
-    default_ev_price = float(EV_model_df['MSRP'].iloc[0])
-    default_icev_price = float(ICEV_model_df['MSRP'].iloc[0])
-  
+
     years_of_ownership_df = pd.DataFrame({'years_of_ownership': range(0,21)})
     months_of_ownership_df = pd.DataFrame({'months_of_ownership': range(1, 13)})
     time_of_ownership_df = pd.merge(years_of_ownership_df, months_of_ownership_df, how='cross')
