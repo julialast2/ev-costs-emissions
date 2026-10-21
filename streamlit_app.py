@@ -162,13 +162,13 @@ default_icev_price = float(ICEV_model_df['price'].iloc[0])
 if grid_emissions_option == 1:
         EV_model_df['ty_plus'] = EV_model_df['ty_emissions'] + EV_model_df['starting_emissions']
         EV_model_df['running_emissions'] = EV_model_df['ty_plus'].cumsum()
-  elif grid_emissions_option == 2:
+elif grid_emissions_option == 2:
         EV_model_df['running_emissions'] = EV_model_df['Manufacture_Emissions_tCO2'] + ((0.532954 / 1000 * EV_model_df['combE'] / 100 * miles_per_year * EV_model_df['cumulative_months']/12))
         #'combE' = kWh/100 miles, 0.532954 tCO2/MWh (from Logan)
-  elif grid_emissions_option == 3:
+elif grid_emissions_option == 3:
         EV_model_df['running_emissions'] = EV_model_df['Manufacture_Emissions_tCO2'] + ((1.047798 / 1000 * EV_model_df['combE'] / 100 * miles_per_year * EV_model_df['cumulative_months']/12))
         #'combE' = kWh/100 miles, 1.047798 tCO2/MWh (from EIA 2.31 lbs CO2/kWh generated from Coal)
-  elif grid_emissions_option == 4:
+elif grid_emissions_option == 4:
         EV_model_df['running_emissions'] = EV_model_df['Manufacture_Emissions_tCO2']
 
     ICEV_model_df['running_emissions'] = ICEV_model_df['Manufacture_Emissions_tCO2'] + (8887 / ICEV_model_df['comb08'] * miles_per_year * ICEV_model_df['cumulative_months']/12/1000/1000)
