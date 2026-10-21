@@ -471,7 +471,7 @@ with st.sidebar:
         label='What was the purchase price of your gas vehicle?',
         min_value=0, 
         max_value=250000, 
-        value=float(ICEV_model_df['price'].iloc[0]), 
+        value= default_icev_price, 
         step=500,
         help='If no value is chosen, the model will use MSRP')
   
