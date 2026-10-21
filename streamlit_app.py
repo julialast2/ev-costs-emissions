@@ -360,70 +360,70 @@ for i, row in initial_values.iterrows():
 
     ## Cost Plot ##
 
-    st.markdown("<h2 style='text-align: center;'>Cost of Ownership</h2>", unsafe_allow_html=True)
-    with st.expander(label = "How to Read This Cost of Ownership Chart"):
+st.markdown("<h2 style='text-align: center;'>Cost of Ownership</h2>", unsafe_allow_html=True)
+with st.expander(label = "How to Read This Cost of Ownership Chart"):
         st.write('This annotated image is an example Cost of Ownership chart with the default settings:')
         st.image('Cost Annotated.png')
-    st.pyplot(fig1)
+st.pyplot(fig1)
 
 
     ## Cost Dashboard Elements ##
 
-    breakeven_value_cost = ''
-    if intersection_point_cost[0] >= 12:
+breakeven_value_cost = ''
+if intersection_point_cost[0] >= 12:
         breakeven_value_cost = str(int(intersection_point_cost[0]/12)) + str(np.where(((int(intersection_point_cost[0]/12)) == 1), ' Year', ' Years'))
-    if (intersection_point_cost[0] > 12) & (intersection_point_cost[0] % 12 != 0):
+if (intersection_point_cost[0] > 12) & (intersection_point_cost[0] % 12 != 0):
         breakeven_value_cost += ', '
-    if intersection_point_cost[0] % 12 != 0:
+if intersection_point_cost[0] % 12 != 0:
         breakeven_value_cost += str(int(intersection_point_cost[0] % 12)) + str(np.where((intersection_point_cost[0] % 12 == 1), ' Month', ' Months'))
-    if breakeven_value_cost == '':
+if breakeven_value_cost == '':
         breakeven_value_cost = 'N/A'
 
-    met1_col1, met1_col2 = st.columns([1,1])
-    with met1_col2:
+met1_col1, met1_col2 = st.columns([1,1])
+with met1_col2:
         vehicle_age_link = 'https://www.bts.gov/content/average-age-automobiles-and-trucks-operation-united-states'
         st.metric(label = "Lifetime Savings: ", 
                 value = "$" + str(lifetime_cost_savings),
                 label_visibility = "visible",
                 help = f"Assuming 14 years of ownership--the [average age of cars passenger cars in operation]({vehicle_age_link}) in the United States")
 
-    with met1_col1:
+with met1_col1:
         st.metric(label = "Cost Breakeven: ",
             value = breakeven_value_cost,
             #value = str(int(intersection_point_cost[0]/12)) + str(np.where(((intersection_point_cost[0]/12) == 1), ' Year', ' Years')), 
             label_visibility = "visible",
             help = "The year during which the running lifetime cost of ownership of the EV is less than the ICEV")
 
-    st.divider()
+st.divider()
 
     ## Emissions Plot ##
 
-    st.markdown("<h2 style='text-align: center;'>Emissions</h2>", unsafe_allow_html=True)
-    with st.expander(label = "How to Read This Emissions Chart"):
+st.markdown("<h2 style='text-align: center;'>Emissions</h2>", unsafe_allow_html=True)
+with st.expander(label = "How to Read This Emissions Chart"):
         st.write('This annotated image is an example Emissions chart with the default settings:')
         st.image('Emissions Annotated.png')
-    st.pyplot(fig2)
+st.pyplot(fig2)
 
 
     ## Emissions Dashboard Elements ##
-    breakeven_value_emissions = ''
-    if intersection_point_emissions[0] >= 12:
+breakeven_value_emissions = ''
+if intersection_point_emissions[0] >= 12:
         breakeven_value_emissions = str(int(intersection_point_emissions[0]/12)) + str(np.where(((int(intersection_point_emissions[0]/12)) == 1), ' Year', ' Years'))
-    if (intersection_point_emissions[0] > 12) & (intersection_point_emissions[0] % 12 != 0):
+if (intersection_point_emissions[0] > 12) & (intersection_point_emissions[0] % 12 != 0):
         breakeven_value_emissions += ', '
-    if intersection_point_emissions[0] % 12 != 0:
+if intersection_point_emissions[0] % 12 != 0:
         breakeven_value_emissions += str(int(intersection_point_emissions[0] % 12)) + str(np.where((intersection_point_emissions[0] % 12 == 1), ' Month', ' Months'))
-    if breakeven_value_emissions == '':
+if breakeven_value_emissions == '':
         breakeven_value_emissions = 'N/A'
     
-    met2_col1, met2_col2 = st.columns([1,1])
-    with met2_col2:
+met2_col1, met2_col2 = st.columns([1,1])
+with met2_col2:
         vehicle_age_link = 'https://www.bts.gov/content/average-age-automobiles-and-trucks-operation-united-states'
         st.metric(label = "Lifetime Saved Emissions: ", 
                   value = str(lifetime_emissions_savings) + " tCO2",
                   label_visibility = "visible",
                   help = f"Assuming 14 years of ownership--the [average age of cars passenger cars in operation]({vehicle_age_link}) in the United States")
-    with met2_col1:
+with met2_col1:
         st.metric(label = "Emissions Breakeven: ",
                   value = breakeven_value_emissions,
                   label_visibility = "visible",
