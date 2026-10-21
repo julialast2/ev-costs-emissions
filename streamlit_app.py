@@ -462,7 +462,7 @@ with st.sidebar:
     gas_price_slider = st.slider(
         label='Gas Price ($/gallon):', 
         min_value=2.00, 
-        max_value=5.00, 
+        max_value=8.00, 
         value=3.20,
         help='Default set to the average price of gas in Utah: $3.20/gallon',
         label_visibility="visible")
