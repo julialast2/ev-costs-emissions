@@ -102,9 +102,6 @@ def calculate_lifetime_cost_savings(df_EV, df_ICEV):
         lifetime_savings = 0
     lifetime_savings = "{:,.0f}".format(lifetime_savings)
     return lifetime_savings
-
-    default_ev_price = float(EV_model_df['MSRP'].iloc[0])
-    default_icev_price = float(ICEV_model_df['MSRP'].iloc[0])
   
 def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     try:
@@ -117,7 +114,7 @@ def calculate_lifetime_emissions_savings(df_EV, df_ICEV):
     return lifetime_savings
 
 
-def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price = default_ev_price, ICEV_purchase_price = default_icev_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit=None):
+def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_price, ICEV_purchase_price, grid_emissions_option=1, miles_per_year=11000, apply_tax_credit= False):
 
     fig1 = plt.figure(figsize=(30, 15))
     fig1.patch.set_linewidth(2)
@@ -131,7 +128,7 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
 
     EV_model_df = vehicles_df[vehicles_df['model'] == model_1]
     ICEV_model_df = vehicles_df[vehicles_df['model'] == model_2]
-
+  
     years_of_ownership_df = pd.DataFrame({'years_of_ownership': range(0,21)})
     months_of_ownership_df = pd.DataFrame({'months_of_ownership': range(1, 13)})
     time_of_ownership_df = pd.merge(years_of_ownership_df, months_of_ownership_df, how='cross')
@@ -159,7 +156,8 @@ def plot_cars(model_1, model_2, gas_price=3.15, kwh_price=0.12, EV_purchase_pric
     EV_model_df['starting_emissions'] = np.where(EV_model_df['cumulative_months'] == 0, 
                                                  EV_model_df['Manufacture_Emissions_tCO2'], 
                                                  0)
-
+    default_ev_price = float(EV_model_df['MSRP'].iloc[0])
+    default_icev_price = float(ICEV_model_df['MSRP'].iloc[0])
 
 if grid_emissions_option == 1:
         EV_model_df['ty_plus'] = EV_model_df['ty_emissions'] + EV_model_df['starting_emissions']
